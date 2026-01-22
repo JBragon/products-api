@@ -1,0 +1,29 @@
+﻿[
+  {
+    "id": "11111111-1111-1111-1111-111111111111",
+    "title": "iPhone 13 128GB",
+    "condition": "new",
+    "price": {
+      "amount": 4500,
+      "currency": "BRL"
+    },
+    "stock": {
+      "availableQuantity": 12
+    },
+    "description": "Produto lacrado.",
+    "attributes": [
+      {
+        "name": "Memória",
+        "value": "128GB"
+      },
+      {
+        "name": "Cor",
+        "value": "Preto"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/img1.jpg" },
+      { "url": "https://example.com/img2.jpg" }
+    ]
+  }
+]

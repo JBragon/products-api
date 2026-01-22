@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Products.Api.Data;
 using Products.Application;
 using Products.Domain.Entities.Products;
 using Products.Infrastructure;
@@ -25,31 +26,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    var env = scope.ServiceProvider.GetRequiredService<IWebHostEnvironment>();
 
-    if (!await db.Products.AnyAsync())
-    {
-        var p = new Product(
-            id: Guid.Parse("11111111-1111-1111-1111-111111111111"),
-            title: "iPhone 13 128GB",
-            condition: ProductCondition.New,
-            price: new Money(4500m, "BRL"),
-            stock: new Stock(12),
-            attributes: new[]
-            {
-                new ProductAttribute("Memória", "128GB"),
-                new ProductAttribute("Cor", "Preto"),
-            },
-            pictures: new[]
-            {
-                new ProductPicture("https://example.com/img1.jpg"),
-                new ProductPicture("https://example.com/img2.jpg"),
-            },
-            description: "Produto lacrado."
-        );
-
-        db.Products.Add(p);
-        await db.SaveChangesAsync();
-    }
+    await ProductJsonSeeder.SeedAsync(db, env);
 }
 
 // Configure the HTTP request pipeline.
