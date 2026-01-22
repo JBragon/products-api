@@ -13,7 +13,7 @@ namespace Products.Application.Ports
            int pageSize,
            CancellationToken ct);
         Task AddAsync(Product product, CancellationToken ct);
-        Task UpdateAsync(Product product, CancellationToken ct);
+        Task SaveChangesAsync(CancellationToken ct);
         Task<Product?> GetByIdForUpdateAsync(Guid id, CancellationToken ct);
     }
 }

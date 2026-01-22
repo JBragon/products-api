@@ -19,7 +19,7 @@ namespace Products.Infrastructure.Configurations
             builder.Property(x => x.Brand).IsRequired().HasMaxLength(80);
             builder.Property(x => x.Model).IsRequired().HasMaxLength(120);
 
-            builder.Property(x => x.Description).HasMaxLength(2000);
+            builder.Property(x => x.Description).HasMaxLength(5000);
             builder.Property(x => x.Condition).IsRequired();
 
             builder.Property(x => x.PurchaseProtection).IsRequired();

@@ -20,7 +20,8 @@ namespace Products.Infrastructure.Repositories
                 .AsTracking()
                 .Include("_attributes")
                 .Include("_pictures")
-                .FirstOrDefaultAsync(p => p.Id == id, ct);
+                .Include("_highlights")
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive, ct);
 
         public async Task<(IReadOnlyCollection<Product> Items, int Total)> SearchAsync
         (
@@ -32,7 +33,11 @@ namespace Products.Infrastructure.Repositories
             CancellationToken ct
         )
         {
-            var query = _db.Products.AsNoTracking().AsQueryable().Where(p => p.IsActive);
+            var query = _db.Products
+                              .AsNoTracking()
+                              .Include("_pictures")
+                              .AsQueryable()
+                              .Where(p => p.IsActive);
 
             if (!string.IsNullOrWhiteSpace(q))
             {
@@ -82,11 +87,8 @@ namespace Products.Infrastructure.Repositories
             await _db.SaveChangesAsync(ct);
         }
 
-        public async Task UpdateAsync(Product product, CancellationToken ct)
-        {
-            _db.Products.Update(product);
-            await _db.SaveChangesAsync(ct);
-        }
+        public Task SaveChangesAsync(CancellationToken ct)
+            => _db.SaveChangesAsync(ct);
 
     }
 }

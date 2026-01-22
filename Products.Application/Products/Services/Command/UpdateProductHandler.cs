@@ -41,7 +41,7 @@ namespace Products.Application.Products.Services.Command
                     .ToList()
             );
 
-            await _repository.UpdateAsync(product, ct);
+            await _repository.SaveChangesAsync(ct);
             await _cache.InvalidateAsync(product.Id, ct);
         }
     }

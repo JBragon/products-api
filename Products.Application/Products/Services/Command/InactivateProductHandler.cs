@@ -1,7 +1,6 @@
 ﻿using Products.Application.Common.Caching;
 using Products.Application.Common.Exceptions;
 using Products.Application.Ports;
-using Products.Domain.Entities.Products;
 
 namespace Products.Application.Products.Services.Command
 {
@@ -27,7 +26,7 @@ namespace Products.Application.Products.Services.Command
 
             product.Inactivate();
 
-            await _repository.UpdateAsync(product, ct);
+            await _repository.SaveChangesAsync(ct);
 
             await _cache.InvalidateAsync(product.Id, ct);
         }
