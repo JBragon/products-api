@@ -10,5 +10,12 @@ namespace Products.Application.Ports
     public interface IProductRepository
     {
         Task<Product?> GetByIdAsync(Guid id, CancellationToken ct);
+        Task<(IReadOnlyCollection<Product> Items, int Total)> SearchAsync(
+           string? q,
+           string? brand,
+           string? condition,
+           int page,
+           int pageSize,
+           CancellationToken ct);
     }
 }

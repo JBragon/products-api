@@ -15,13 +15,61 @@ namespace Products.Infrastructure.Repositories
 
         public ProductRepository(DatabaseContext db) => _db = db;
 
-        public Task<Product?> GetByIdAsync(Guid id, CancellationToken ct)
+        public Task<Product?> GetByIdAsync(Guid id, CancellationToken ct) =>
+            _db.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, ct);
+
+        public async Task<(IReadOnlyCollection<Product> Items, int Total)> SearchAsync
+        (
+            string? q,
+            string? brand,
+            string? condition,
+            int page,
+            int pageSize,
+            CancellationToken ct
+        )
         {
-            // Owned collections (Pictures/Attributes) normalmente são carregadas junto.
-            // Mesmo assim, usar AsNoTracking é bom para leitura.
-            return _db.Products
-                .AsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == id, ct);
+            var query = _db.Products.AsNoTracking().AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                var term = q.Trim();
+                query = query.Where(p =>
+                    p.Title.Contains(term) ||
+                    p.Brand.Contains(term) ||
+                    p.Model.Contains(term));
+            }
+
+            if (!string.IsNullOrWhiteSpace(brand))
+            {
+                var b = brand.Trim();
+                query = query.Where(p => p.Brand == b);
+            }
+
+            if (!string.IsNullOrWhiteSpace(condition))
+            {
+                // aceita "new"/"used" etc
+                if (Enum.TryParse<ProductCondition>(condition, true, out var parsed))
+                    query = query.Where(p => p.Condition == parsed);
+            }
+
+            // ordenação default "marketplace": mais bem avaliados primeiro, depois título
+            query = query
+                .OrderByDescending(p => p.Rating != null ? p.Rating.Average : 0m)
+                .ThenBy(p => p.Title);
+
+
+            var baseQuery = query;
+
+            var countTask = baseQuery.CountAsync(ct);
+
+            var itemsTask = baseQuery
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(ct);
+
+            await Task.WhenAll(countTask, itemsTask);
+
+            return (await itemsTask, await countTask);
         }
     }
 }

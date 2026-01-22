@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Products.Application.Products.Queries;
 using Products.Application.Products.Services;
 
 namespace Products.Api.Controllers
@@ -23,6 +24,25 @@ namespace Products.Api.Controllers
 
             var result = await _service.GetDetailAsync(guid, ct);
             return result is null ? NotFound() : Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetList
+        (
+            [FromQuery] string? q,
+            [FromQuery] string? brand,
+            [FromQuery] string? condition,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            CancellationToken ct = default
+        )
+        {
+            var result = await _service.GetListAsync(
+                new ProductListQuery(q, brand, condition, page, pageSize),
+                ct
+            );
+
+            return Ok(result);
         }
     }
 }

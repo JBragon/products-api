@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
+using Products.Application.Common;
 using Products.Application.Ports;
 using Products.Application.Products.Dtos;
+using Products.Application.Products.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +30,7 @@ namespace Products.Application.Products.Services
 
         public async Task<ProductDetailDto?> GetDetailAsync(Guid productId, CancellationToken ct)
         {
-            var cacheKey = CacheKeys.ProductDetail(productId);
+            var cacheKey = $"products:detail:{productId}";
 
             if (_cache.TryGetValue(cacheKey, out ProductDetailDto? cached))
                 return cached;
@@ -50,9 +52,40 @@ namespace Products.Application.Products.Services
 
             return dto;
         }
-        private static class CacheKeys
+
+        public async Task<PagedResult<ProductListItemDto>> GetListAsync(ProductListQuery query, CancellationToken ct)
         {
-            public static string ProductDetail(Guid id) => $"products:detail:{id}";
+            // limites seguros
+            var page = query.Page < 1 ? 1 : query.Page;
+            var pageSize = query.PageSize is < 1 ? 10 : query.PageSize;
+            if (pageSize > 50) pageSize = 50;
+
+            var (items, total) = await _repository.SearchAsync(
+                q: query.Q,
+                brand: query.Brand,
+                condition: query.Condition,
+                page: page,
+                pageSize: pageSize,
+                ct: ct
+            );
+
+            // mapeia manualmente (lista é simples e evita AutoMapper overkill)
+            var dtos = items.Select(p => new ProductListItemDto(
+                p.Id,
+                p.Title,
+                p.Brand,
+                p.Model,
+                p.Condition.ToString().ToLowerInvariant(),
+                p.Price.Amount,
+                p.Price.Currency,
+                p.Pictures.FirstOrDefault()?.Url, // thumbnail
+                p.Stock.AvailableQuantity,
+                p.Rating?.Average,
+                p.Rating?.TotalReviews
+            )).ToList();
+
+            return new PagedResult<ProductListItemDto>(dtos, page, pageSize, total);
         }
+
     }
 }
