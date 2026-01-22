@@ -1,20 +1,46 @@
 ﻿[
   {
-    "id": "11111111-1111-1111-1111-111111111111",
-    "title": "iPhone 13 128GB",
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f001",
+    "title": "Smartphone Samsung Galaxy S23 256GB",
+    "brand": "Samsung",
+    "model": "Galaxy S23 256GB",
     "condition": "new",
     "price": {
-      "amount": 4500,
+      "amount": 3999.90,
       "currency": "BRL"
     },
-    "stock": {
-      "availableQuantity": 12
+    "installments": {
+      "quantity": 12,
+      "amount": 333.33,
+      "interestFree": true
     },
-    "description": "Produto lacrado.",
+    "stock": { "availableQuantity": 20 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-26T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 30
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.8,
+      "totalReviews": 1843
+    },
+    "highlights": [ "Tela AMOLED", "256GB de armazenamento", "5G" ],
     "attributes": [
       {
-        "name": "Memória",
-        "value": "128GB"
+        "name": "Armazenamento",
+        "value": "256GB"
+      },
+      {
+        "name": "RAM",
+        "value": "8GB"
+      },
+      {
+        "name": "Conectividade",
+        "value": "5G"
       },
       {
         "name": "Cor",
@@ -22,8 +48,1188 @@
       }
     ],
     "pictures": [
-      { "url": "https://example.com/img1.jpg" },
-      { "url": "https://example.com/img2.jpg" }
-    ]
+      { "url": "https://example.com/galaxy-s23-1.jpg" },
+      { "url": "https://example.com/galaxy-s23-2.jpg" }
+    ],
+    "description": "Smartphone premium com câmera avançada e excelente desempenho."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f002",
+    "title": "iPhone 13 128GB",
+    "brand": "Apple",
+    "model": "iPhone 13 128GB",
+    "condition": "new",
+    "price": {
+      "amount": 3899.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 324.92,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 12 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-25T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 30
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.9,
+      "totalReviews": 9321
+    },
+    "highlights": [ "Câmera dupla", "128GB", "Face ID" ],
+    "attributes": [
+      {
+        "name": "Armazenamento",
+        "value": "128GB"
+      },
+      {
+        "name": "Tela",
+        "value": "6.1\""
+      },
+      {
+        "name": "Chip",
+        "value": "A15 Bionic"
+      },
+      {
+        "name": "Cor",
+        "value": "Meia-noite"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/iphone13-1.jpg" }
+    ],
+    "description": "iPhone com ótima performance e câmeras consistentes."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f003",
+    "title": "Notebook Lenovo IdeaPad 3 Ryzen 7 16GB 512GB SSD",
+    "brand": "Lenovo",
+    "model": "IdeaPad 3 Ryzen 7",
+    "condition": "new",
+    "price": {
+      "amount": 3299.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 329.90,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 14 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-27T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 30
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.6,
+      "totalReviews": 1120
+    },
+    "highlights": [ "Ryzen 7", "16GB RAM", "SSD 512GB" ],
+    "attributes": [
+      {
+        "name": "Processador",
+        "value": "AMD Ryzen 7"
+      },
+      {
+        "name": "RAM",
+        "value": "16GB"
+      },
+      {
+        "name": "Armazenamento",
+        "value": "512GB SSD"
+      },
+      {
+        "name": "Tela",
+        "value": "15.6\" Full HD"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/ideapad3-1.jpg" },
+      { "url": "https://example.com/ideapad3-2.jpg" }
+    ],
+    "description": "Notebook equilibrado para trabalho e estudos com boa performance."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f004",
+    "title": "Monitor LG UltraGear 27\" 144Hz Full HD",
+    "brand": "LG",
+    "model": "UltraGear 27GN65R",
+    "condition": "new",
+    "price": {
+      "amount": 1299.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 129.99,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 25 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-24T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.7,
+      "totalReviews": 780
+    },
+    "highlights": [ "144Hz", "1ms", "Ideal para games" ],
+    "attributes": [
+      {
+        "name": "Tamanho",
+        "value": "27\""
+      },
+      {
+        "name": "Taxa de atualização",
+        "value": "144Hz"
+      },
+      {
+        "name": "Resolução",
+        "value": "Full HD"
+      },
+      {
+        "name": "Painel",
+        "value": "IPS"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/ultragear27-1.jpg" }
+    ],
+    "description": "Monitor gamer com alta taxa de atualização e ótima fluidez."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f005",
+    "title": "Console PlayStation 5 Slim",
+    "brand": "Sony",
+    "model": "PlayStation 5 Slim",
+    "condition": "new",
+    "price": {
+      "amount": 3999.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 333.25,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 9 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-23T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.9,
+      "totalReviews": 5200
+    },
+    "highlights": [ "SSD ultrarrápido", "Ray tracing", "Versão Slim" ],
+    "attributes": [
+      {
+        "name": "Armazenamento",
+        "value": "1TB"
+      },
+      {
+        "name": "Mídia",
+        "value": "Digital/Disco (varia)"
+      },
+      {
+        "name": "Cor",
+        "value": "Branco"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/ps5slim-1.jpg" }
+    ],
+    "description": "Console de nova geração com desempenho e exclusivos de alto nível."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f006",
+    "title": "Nintendo Switch OLED 64GB",
+    "brand": "Nintendo",
+    "model": "Switch OLED",
+    "condition": "new",
+    "price": {
+      "amount": 2199.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 219.90,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 18 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-28T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.8,
+      "totalReviews": 3100
+    },
+    "highlights": [ "Tela OLED", "Modo portátil e dock", "Versátil" ],
+    "attributes": [
+      {
+        "name": "Armazenamento",
+        "value": "64GB"
+      },
+      {
+        "name": "Tela",
+        "value": "OLED"
+      },
+      {
+        "name": "Cor",
+        "value": "Branco"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/switch-oled-1.jpg" },
+      { "url": "https://example.com/switch-oled-2.jpg" }
+    ],
+    "description": "Console híbrido com tela OLED e ótima experiência portátil."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f007",
+    "title": "Fone Bluetooth Sony WH-1000XM5",
+    "brand": "Sony",
+    "model": "WH-1000XM5",
+    "condition": "new",
+    "price": {
+      "amount": 2499.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 208.33,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 16 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-22T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.9,
+      "totalReviews": 1450
+    },
+    "highlights": [ "Cancelamento de ruído", "Bateria longa", "Confortável" ],
+    "attributes": [
+      {
+        "name": "Tipo",
+        "value": "Over-ear"
+      },
+      {
+        "name": "ANC",
+        "value": "Sim"
+      },
+      {
+        "name": "Conexão",
+        "value": "Bluetooth"
+      },
+      {
+        "name": "Cor",
+        "value": "Preto"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/wh1000xm5-1.jpg" }
+    ],
+    "description": "Headphone premium com excelente cancelamento de ruído e áudio."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f008",
+    "title": "Smart TV 55\" Samsung Crystal UHD 4K",
+    "brand": "Samsung",
+    "model": "Crystal UHD 55\" 4K",
+    "condition": "new",
+    "price": {
+      "amount": 2199.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 183.33,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 22 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-29T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.6,
+      "totalReviews": 980
+    },
+    "highlights": [ "4K", "Tizen", "HDR" ],
+    "attributes": [
+      {
+        "name": "Tamanho",
+        "value": "55\""
+      },
+      {
+        "name": "Resolução",
+        "value": "4K"
+      },
+      {
+        "name": "Sistema",
+        "value": "Tizen"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/tv55-1.jpg" }
+    ],
+    "description": "Smart TV 4K com boa qualidade de imagem e apps populares."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f009",
+    "title": "Câmera Mirrorless Sony ZV-E10 (Kit)",
+    "brand": "Sony",
+    "model": "ZV-E10 Kit",
+    "condition": "new",
+    "price": {
+      "amount": 4799.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 399.92,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 7 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-30T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.8,
+      "totalReviews": 610
+    },
+    "highlights": [ "Ótima para vlog", "Lente do kit inclusa", "Foco rápido" ],
+    "attributes": [
+      {
+        "name": "Sensor",
+        "value": "APS-C"
+      },
+      {
+        "name": "Uso",
+        "value": "Vlog/Foto"
+      },
+      {
+        "name": "Lente",
+        "value": "Inclusa (kit)"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/zve10-1.jpg" },
+      { "url": "https://example.com/zve10-2.jpg" }
+    ],
+    "description": "Câmera versátil para criadores de conteúdo e fotografia."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f010",
+    "title": "Aspirador Robô Xiaomi Vacuum Mop 2",
+    "brand": "Xiaomi",
+    "model": "Vacuum Mop 2",
+    "condition": "new",
+    "price": {
+      "amount": 1399.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 139.90,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 30 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-23T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.5,
+      "totalReviews": 2050
+    },
+    "highlights": [ "Aspira e passa pano", "Mapeamento inteligente", "App" ],
+    "attributes": [
+      {
+        "name": "Funções",
+        "value": "Aspira e passa pano"
+      },
+      {
+        "name": "Conectividade",
+        "value": "Wi-Fi"
+      },
+      {
+        "name": "Cor",
+        "value": "Branco"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/robot-vac-1.jpg" }
+    ],
+    "description": "Robô aspirador com recursos de mapeamento e controle por app."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f011",
+    "title": "Cafeteira Nespresso Essenza Mini",
+    "brand": "Nespresso",
+    "model": "Essenza Mini",
+    "condition": "new",
+    "price": {
+      "amount": 499.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 6,
+      "amount": 83.32,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 40 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-27T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.7,
+      "totalReviews": 3900
+    },
+    "highlights": [ "Compacta", "Cápsulas", "Rápida" ],
+    "attributes": [
+      {
+        "name": "Tipo",
+        "value": "Cápsulas"
+      },
+      {
+        "name": "Voltagem",
+        "value": "110V/220V (varia)"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/nespresso-1.jpg" }
+    ],
+    "description": "Cafeteira compacta para espresso com praticidade."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f012",
+    "title": "Air Fryer Philips Walita 4.1L",
+    "brand": "Philips Walita",
+    "model": "Airfryer 4.1L",
+    "condition": "new",
+    "price": {
+      "amount": 599.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 59.90,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 35 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-26T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.6,
+      "totalReviews": 8120
+    },
+    "highlights": [ "Fritura sem óleo", "4.1L", "Fácil de limpar" ],
+    "attributes": [
+      {
+        "name": "Capacidade",
+        "value": "4.1L"
+      },
+      {
+        "name": "Potência",
+        "value": "1400W (aprox.)"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/airfryer-1.jpg" }
+    ],
+    "description": "Air fryer para refeições rápidas com menos óleo."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f013",
+    "title": "Bicicleta MTB Aro 29 Alumínio 21v",
+    "brand": "Caloi",
+    "model": "MTB Aro 29 21v",
+    "condition": "new",
+    "price": {
+      "amount": 1299.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 108.25,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 10 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-31T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.4,
+      "totalReviews": 520
+    },
+    "highlights": [ "Aro 29", "21 velocidades", "Quadro alumínio" ],
+    "attributes": [
+      {
+        "name": "Aro",
+        "value": "29"
+      },
+      {
+        "name": "Marchas",
+        "value": "21v"
+      },
+      {
+        "name": "Quadro",
+        "value": "Alumínio"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/mtb29-1.jpg" }
+    ],
+    "description": "Bicicleta MTB para passeios e trilhas leves."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f014",
+    "title": "Tênis Nike Air Zoom Pegasus",
+    "brand": "Nike",
+    "model": "Air Zoom Pegasus",
+    "condition": "new",
+    "price": {
+      "amount": 649.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 64.99,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 50 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-24T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 30
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.7,
+      "totalReviews": 2100
+    },
+    "highlights": [ "Amortecimento", "Confortável", "Corrida" ],
+    "attributes": [
+      {
+        "name": "Uso",
+        "value": "Corrida"
+      },
+      {
+        "name": "Gênero",
+        "value": "Unissex"
+      },
+      {
+        "name": "Numeração",
+        "value": "Varia"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/pegasus-1.jpg" }
+    ],
+    "description": "Tênis versátil para corrida e treino diário."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f015",
+    "title": "Mochila para Notebook 15.6\" Impermeável",
+    "brand": "SwissGear",
+    "model": "Laptop Backpack 15.6",
+    "condition": "new",
+    "price": {
+      "amount": 229.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 6,
+      "amount": 38.32,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 80 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-26T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 30
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.5,
+      "totalReviews": 890
+    },
+    "highlights": [ "Compartimento notebook", "Impermeável", "Vários bolsos" ],
+    "attributes": [
+      {
+        "name": "Compatibilidade",
+        "value": "Até 15.6\""
+      },
+      {
+        "name": "Material",
+        "value": "Poliéster"
+      },
+      {
+        "name": "Cor",
+        "value": "Preto"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/mochila-1.jpg" }
+    ],
+    "description": "Mochila resistente e confortável para uso diário."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f016",
+    "title": "Cadeira Gamer com Apoio Lombar",
+    "brand": "Husky Gaming",
+    "model": "Storm",
+    "condition": "new",
+    "price": {
+      "amount": 899.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 74.92,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 22 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-30T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.3,
+      "totalReviews": 640
+    },
+    "highlights": [ "Apoio lombar", "Reclinável", "Boa ergonomia" ],
+    "attributes": [
+      {
+        "name": "Material",
+        "value": "Couro sintético"
+      },
+      {
+        "name": "Reclínio",
+        "value": "Sim"
+      },
+      {
+        "name": "Cor",
+        "value": "Preto/Vermelho"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/cadeira-gamer-1.jpg" }
+    ],
+    "description": "Cadeira gamer com ajustes e conforto para longas sessões."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f017",
+    "title": "Teclado Mecânico Redragon Kumara",
+    "brand": "Redragon",
+    "model": "Kumara K552",
+    "condition": "new",
+    "price": {
+      "amount": 199.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 6,
+      "amount": 33.32,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 60 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-24T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.6,
+      "totalReviews": 4300
+    },
+    "highlights": [ "Mecânico", "Compacto", "RGB" ],
+    "attributes": [
+      {
+        "name": "Tipo",
+        "value": "Mecânico"
+      },
+      {
+        "name": "Layout",
+        "value": "ABNT2 (varia)"
+      },
+      {
+        "name": "Iluminação",
+        "value": "RGB"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/kumara-1.jpg" }
+    ],
+    "description": "Teclado mecânico popular pelo custo-benefício."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f018",
+    "title": "Mouse Logitech G305 Lightspeed",
+    "brand": "Logitech",
+    "model": "G305 Lightspeed",
+    "condition": "new",
+    "price": {
+      "amount": 199.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 6,
+      "amount": 33.17,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 70 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-23T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.8,
+      "totalReviews": 5600
+    },
+    "highlights": [ "Sem fio", "Baixa latência", "Leve" ],
+    "attributes": [
+      {
+        "name": "Conexão",
+        "value": "Wireless (USB)"
+      },
+      {
+        "name": "DPI",
+        "value": "Até 12000"
+      },
+      {
+        "name": "Cor",
+        "value": "Preto"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/g305-1.jpg" }
+    ],
+    "description": "Mouse gamer sem fio com excelente desempenho e bateria."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f019",
+    "title": "SSD NVMe Kingston 1TB",
+    "brand": "Kingston",
+    "model": "NV2 1TB",
+    "condition": "new",
+    "price": {
+      "amount": 329.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 32.99,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 100 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-25T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.7,
+      "totalReviews": 2400
+    },
+    "highlights": [ "NVMe", "1TB", "Rápido" ],
+    "attributes": [
+      {
+        "name": "Capacidade",
+        "value": "1TB"
+      },
+      {
+        "name": "Interface",
+        "value": "NVMe"
+      },
+      {
+        "name": "Formato",
+        "value": "M.2"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/ssd-nv2-1.jpg" }
+    ],
+    "description": "SSD NVMe para upgrades com grande ganho de performance."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f020",
+    "title": "Placa de Vídeo NVIDIA GeForce RTX 4060 8GB",
+    "brand": "NVIDIA",
+    "model": "GeForce RTX 4060 8GB",
+    "condition": "new",
+    "price": {
+      "amount": 2199.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 183.25,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 11 },
+    "shipping": {
+      "freeShipping": true,
+      "estimatedDeliveryDate": "2026-01-30T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.7,
+      "totalReviews": 780
+    },
+    "highlights": [ "DLSS", "Ray tracing", "Eficiência energética" ],
+    "attributes": [
+      {
+        "name": "Memória",
+        "value": "8GB"
+      },
+      {
+        "name": "Chip",
+        "value": "RTX 4060"
+      },
+      {
+        "name": "Saídas",
+        "value": "HDMI/DisplayPort"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/rtx4060-1.jpg" }
+    ],
+    "description": "GPU para jogos em 1080p/1440p com suporte a DLSS."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f021",
+    "title": "Livro: Clean Architecture (Português)",
+    "brand": "Alta Books",
+    "model": "Clean Architecture",
+    "condition": "new",
+    "price": {
+      "amount": 129.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 3,
+      "amount": 43.30,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 120 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-27T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.8,
+      "totalReviews": 2100
+    },
+    "highlights": [ "Arquitetura de software", "Boas práticas", "Referência" ],
+    "attributes": [
+      {
+        "name": "Autor",
+        "value": "Robert C. Martin"
+      },
+      {
+        "name": "Idioma",
+        "value": "Português"
+      },
+      {
+        "name": "Tipo",
+        "value": "Livro físico"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/clean-architecture-book-1.jpg" }
+    ],
+    "description": "Livro referência sobre princípios e padrões de arquitetura."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f022",
+    "title": "Panela de Pressão Elétrica 6L",
+    "brand": "Mondial",
+    "model": "PE-38 6L",
+    "condition": "new",
+    "price": {
+      "amount": 349.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 10,
+      "amount": 34.99,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 45 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-28T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.5,
+      "totalReviews": 3100
+    },
+    "highlights": [ "6L", "Timer", "Válvulas de segurança" ],
+    "attributes": [
+      {
+        "name": "Capacidade",
+        "value": "6L"
+      },
+      {
+        "name": "Timer",
+        "value": "Sim"
+      },
+      {
+        "name": "Voltagem",
+        "value": "110V/220V (varia)"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/pressao-eletrica-1.jpg" }
+    ],
+    "description": "Panela elétrica para praticidade no dia a dia."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f023",
+    "title": "Purificador de Água Compacto",
+    "brand": "Consul",
+    "model": "CPC31AB",
+    "condition": "new",
+    "price": {
+      "amount": 699.00,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 12,
+      "amount": 58.25,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 19 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-02-01T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.4,
+      "totalReviews": 980
+    },
+    "highlights": [ "Água gelada/natural", "Compacto", "Filtro fácil" ],
+    "attributes": [
+      {
+        "name": "Temperatura",
+        "value": "Natural/Gelada"
+      },
+      {
+        "name": "Instalação",
+        "value": "Bancada"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/purificador-1.jpg" }
+    ],
+    "description": "Purificador compacto para cozinha com opções de temperatura."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f024",
+    "title": "Kit Ferramentas 129 Peças com Maleta",
+    "brand": "Sparta",
+    "model": "Kit 129 peças",
+    "condition": "new",
+    "price": {
+      "amount": 179.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 6,
+      "amount": 29.98,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 65 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-26T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.6,
+      "totalReviews": 1500
+    },
+    "highlights": [ "129 peças", "Maleta", "Uso doméstico" ],
+    "attributes": [
+      {
+        "name": "Peças",
+        "value": "129"
+      },
+      {
+        "name": "Uso",
+        "value": "Doméstico"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/ferramentas-1.jpg" }
+    ],
+    "description": "Kit completo para pequenos reparos e manutenção."
+  },
+  {
+    "id": "0d3d8b9c-0c1d-4b0b-9a08-7e87d2c2f025",
+    "title": "Câmera de Segurança Wi-Fi 1080p",
+    "brand": "Intelbras",
+    "model": "iM3 C",
+    "condition": "new",
+    "price": {
+      "amount": 189.90,
+      "currency": "BRL"
+    },
+    "installments": {
+      "quantity": 6,
+      "amount": 31.65,
+      "interestFree": true
+    },
+    "stock": { "availableQuantity": 90 },
+    "shipping": {
+      "freeShipping": false,
+      "estimatedDeliveryDate": "2026-01-24T00:00:00"
+    },
+    "returns": {
+      "allowed": true,
+      "windowDays": 7
+    },
+    "purchaseProtection": true,
+    "rating": {
+      "average": 4.5,
+      "totalReviews": 4200
+    },
+    "highlights": [ "Wi-Fi", "1080p", "Visão noturna" ],
+    "attributes": [
+      {
+        "name": "Resolução",
+        "value": "1080p"
+      },
+      {
+        "name": "Conectividade",
+        "value": "Wi-Fi"
+      },
+      {
+        "name": "Visão noturna",
+        "value": "Sim"
+      }
+    ],
+    "pictures": [
+      { "url": "https://example.com/camera-wifi-1.jpg" }
+    ],
+    "description": "Câmera Wi-Fi para monitoramento com app e visão noturna."
   }
 ]
