@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/Adapters/" />
+  <Folder Name="/Adapters/Driven/">
+    <Project Path="Products.Infrastructure/Products.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Adapters/Driving/">
+    <Project Path="Products.Api/Products.Api.csproj" />
+  </Folder>
+  <Folder Name="/Core/">
+    <Project Path="Products.Application/Products.Application.csproj" />
+    <Project Path="Products.Domain/Products.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Products.IntegrationTests/Products.IntegrationTests.csproj" />
+    <Project Path="Products.UnitTests/Products.UnitTests.csproj" />
+  </Folder>
+</Solution>
