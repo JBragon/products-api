@@ -17,5 +17,7 @@ namespace Products.Application.Ports
            int page,
            int pageSize,
            CancellationToken ct);
+        Task AddAsync(Product product, CancellationToken ct);
+        Task<bool> ExistsAsync(Guid id, CancellationToken ct);
     }
 }

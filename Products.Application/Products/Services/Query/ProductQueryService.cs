@@ -5,7 +5,7 @@ using Products.Application.Ports;
 using Products.Application.Products.Dtos;
 using Products.Application.Products.Queries;
 
-namespace Products.Application.Products.Services
+namespace Products.Application.Products.Services.Query
 {
     public sealed class ProductQueryService : IProductQueryService
     {
@@ -73,7 +73,7 @@ namespace Products.Application.Products.Services
                 p.Condition.ToString().ToLowerInvariant(),
                 p.Price.Amount,
                 p.Price.Currency,
-                p.Pictures.FirstOrDefault()?.Url, // thumbnail
+                p.Pictures.FirstOrDefault()?.Url,
                 p.Stock.AvailableQuantity,
                 p.Rating?.Average,
                 p.Rating?.TotalReviews

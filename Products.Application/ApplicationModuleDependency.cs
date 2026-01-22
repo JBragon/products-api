@@ -2,12 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Products.Application.Products.Mapping;
-using Products.Application.Products.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Products.Application.Products.Services.Command;
+using Products.Application.Products.Services.Query;
 
 namespace Products.Application
 {
@@ -20,10 +16,11 @@ namespace Products.Application
 
             var mapperConfig = new MapperConfiguration(configExpression, NullLoggerFactory.Instance);
 
-            services.AddSingleton<IMapper>(sp =>
+            services.AddSingleton(sp =>
                 mapperConfig.CreateMapper());
 
             services.AddScoped<IProductQueryService, ProductQueryService>();
+            services.AddScoped<ICreateProductHandler, CreateProductHandler>();
 
             return services;
         }

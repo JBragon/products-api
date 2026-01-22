@@ -52,6 +52,4 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
-/.vs/products-api.slnx/v18
-/.vs/products-api.slnx
-/.vs/ProjectEvaluation
+/.vs/

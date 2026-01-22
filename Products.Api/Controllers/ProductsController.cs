@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Products.Api.Contracts;
 using Products.Application.Products.Queries;
-using Products.Application.Products.Services;
+using Products.Application.Products.Services.Command;
+using Products.Application.Products.Services.Query;
 
 namespace Products.Api.Controllers
 {
@@ -9,9 +11,15 @@ namespace Products.Api.Controllers
     public sealed class ProductsController : ControllerBase
     {
         private readonly IProductQueryService _service;
+        private readonly ICreateProductHandler _createProductHandler;
 
-        public ProductsController(IProductQueryService service)
-            => _service = service;
+        public ProductsController(
+            IProductQueryService service,
+            ICreateProductHandler createProductHandler)
+        {
+            _service = service;
+            _createProductHandler = createProductHandler;
+        }
 
         // GET /api/products/{id}
         [HttpGet("{id:guid}")]
@@ -43,6 +51,42 @@ namespace Products.Api.Controllers
             );
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(
+    [FromBody] ProductCreateRequest request,
+    [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey,
+    CancellationToken ct)
+        {
+            if (string.IsNullOrWhiteSpace(idempotencyKey))
+                return BadRequest("Idempotency-Key header is required.");
+
+            var command = new CreateProductCommand(
+                ProductId: Guid.NewGuid(),
+                Title: request.Title,
+                Brand: request.Brand,
+                Model: request.Model,
+                Condition: request.Condition,
+                Price: request.Price,
+                Currency: request.Currency,
+                Stock: request.Stock,
+                Description: request.Description,
+                Attributes: request.Attributes?
+                    .Select(a => (a.Name, a.Value))
+                    .ToList() ?? [],
+                Pictures: request.Pictures?
+                    .Select(p => p.Url)
+                    .ToList() ?? []
+            );
+
+            var productId = await _createProductHandler.HandleAsync(
+                command,
+                idempotencyKey,
+                ct
+            );
+
+            return CreatedAtAction(nameof(GetById), new { id = productId }, null);
         }
     }
 }

@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Products.Application.Common.Idempotency;
 using Products.Application.Ports;
+using Products.Infrastructure.Idempotency;
 using Products.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Products.Infrastructure
 {
@@ -20,6 +17,7 @@ namespace Products.Infrastructure
             });
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IIdempotencyStore, InMemoryIdempotencyStore>();
 
             return services;
         }

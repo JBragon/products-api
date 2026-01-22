@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Products.Application.Ports;
 using Products.Domain.Entities.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Products.Infrastructure.Repositories
 {
@@ -71,5 +66,15 @@ namespace Products.Infrastructure.Repositories
 
             return (await itemsTask, await countTask);
         }
+
+        public async Task AddAsync(Product product, CancellationToken ct)
+        {
+            _db.Products.Add(product);
+            await _db.SaveChangesAsync(ct);
+        }
+
+        public Task<bool> ExistsAsync(Guid id, CancellationToken ct) =>
+            _db.Products.AsNoTracking().AnyAsync(x => x.Id == id, ct);
+
     }
 }
