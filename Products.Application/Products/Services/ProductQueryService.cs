@@ -4,11 +4,6 @@ using Products.Application.Common;
 using Products.Application.Ports;
 using Products.Application.Products.Dtos;
 using Products.Application.Products.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Products.Application.Products.Services
 {
