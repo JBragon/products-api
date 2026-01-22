@@ -34,6 +34,16 @@ using (var scope = app.Services.CreateScope())
             condition: ProductCondition.New,
             price: new Money(4500m, "BRL"),
             stock: new Stock(12),
+            attributes: new[]
+            {
+                new ProductAttribute("Memória", "128GB"),
+                new ProductAttribute("Cor", "Preto"),
+            },
+            pictures: new[]
+            {
+                new ProductPicture("https://example.com/img1.jpg"),
+                new ProductPicture("https://example.com/img2.jpg"),
+            },
             description: "Produto lacrado."
         );
 

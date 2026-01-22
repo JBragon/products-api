@@ -13,19 +13,23 @@ namespace Products.Application.Products.Mapping
     {
         public ProductDetailProfile()
         {
-            CreateMap<Product, ProductDetailDto>()
-                .ForMember(d => d.Condition,
-                    o => o.MapFrom(s => s.Condition.ToString().ToLowerInvariant()))
-                .ForMember(d => d.Price,
-                    o => o.MapFrom(s => s.Price.Amount))
-                .ForMember(d => d.Currency,
-                    o => o.MapFrom(s => s.Price.Currency))
-                .ForMember(d => d.AvailableQuantity,
-                    o => o.MapFrom(s => s.Stock.AvailableQuantity))
-                .ForMember(d => d.Pictures,
-                    o => o.MapFrom(s => s.Pictures.Select(p => p.Url)));
-
             CreateMap<ProductAttribute, ProductAttributeDto>();
+
+            CreateMap<Product, ProductDetailDto>()
+                // força o AutoMapper a criar o DTO pelo construtor
+                .ConstructUsing(src => new ProductDetailDto(
+                    src.Id,
+                    src.Title,
+                    src.Condition.ToString().ToLowerInvariant(),
+                    src.Price.Amount,
+                    src.Price.Currency,
+                    src.Stock.AvailableQuantity,
+                    src.Pictures.Select(p => p.Url).ToList(),
+                    src.Attributes.Select(a => new ProductAttributeDto(a.Name, a.Value)).ToList(),
+                    src.Description
+                ))
+                // e impede ele de tentar mapear membros depois
+                .ForAllMembers(opt => opt.Ignore());
         }
     }
 }

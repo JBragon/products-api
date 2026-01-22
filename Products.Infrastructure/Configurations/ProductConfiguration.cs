@@ -13,59 +13,61 @@ namespace Products.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.ToTable("products");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Title).IsRequired().HasMaxLength(200);
-            builder.Property(x => x.Description).HasMaxLength(2000);
-            builder.Property(x => x.Condition).IsRequired();
+            builder.Property(x => x.Title)
+                .IsRequired()
+                .HasMaxLength(200);
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(2000);
+
+            builder.Property(x => x.Condition)
+                .IsRequired();
 
             builder.OwnsOne(x => x.Price, money =>
             {
-                money.Property(p => p.Amount).HasColumnName("price_amount").IsRequired();
-                money.Property(p => p.Currency).HasColumnName("price_currency").HasMaxLength(5).IsRequired();
+                money.Property(p => p.Amount)
+                    .IsRequired();
+
+                money.Property(p => p.Currency)
+                    .IsRequired()
+                    .HasMaxLength(5);
             });
 
             builder.OwnsOne(x => x.Stock, stock =>
             {
-                stock.Property(s => s.AvailableQuantity).HasColumnName("available_quantity").IsRequired();
+                stock.Property(s => s.AvailableQuantity)
+                    .IsRequired();
             });
 
-            // ✅ Attributes (backing field)
-            builder.Navigation(x => x.Attributes).UsePropertyAccessMode(PropertyAccessMode.Field);
+            builder.Ignore(x => x.Attributes);
+            builder.Ignore(x => x.Pictures);
 
-            builder.OwnsMany(typeof(ProductAttribute), "_attributes", attrs =>
+            builder.OwnsMany<ProductAttribute>("_attributes", attrs =>
             {
-                attrs.ToTable("product_attributes");
                 attrs.WithOwner().HasForeignKey("product_id");
 
                 attrs.Property<Guid>("id");
                 attrs.HasKey("id");
 
-                attrs.Property<string>("Name")
-                    .HasColumnName("name")
+                attrs.Property(a => a.Name)
                     .IsRequired()
                     .HasMaxLength(80);
 
-                attrs.Property<string>("Value")
-                    .HasColumnName("value")
+                attrs.Property(a => a.Value)
                     .IsRequired()
                     .HasMaxLength(200);
             });
 
-            // ✅ Pictures (backing field)
-            builder.Navigation(x => x.Pictures).UsePropertyAccessMode(PropertyAccessMode.Field);
-
-            builder.OwnsMany(typeof(ProductPicture), "_pictures", pics =>
+            builder.OwnsMany<ProductPicture>("_pictures", pics =>
             {
-                pics.ToTable("product_pictures");
                 pics.WithOwner().HasForeignKey("product_id");
 
                 pics.Property<Guid>("id");
                 pics.HasKey("id");
 
-                pics.Property<string>("Url")
-                    .HasColumnName("url")
+                pics.Property(p => p.Url)
                     .IsRequired()
                     .HasMaxLength(500);
             });
