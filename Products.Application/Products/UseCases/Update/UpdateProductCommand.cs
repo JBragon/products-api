@@ -1,6 +1,6 @@
-﻿namespace Products.Application.Products.Services.Command
+﻿namespace Products.Application.Products.UseCases.Update
 {
-    public sealed record CreateProductCommand(
+    public sealed record UpdateProductCommand(
         Guid ProductId,
         string Title,
         string Brand,

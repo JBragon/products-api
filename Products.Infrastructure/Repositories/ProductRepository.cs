@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Products.Application.Ports;
+using Products.Application.Products.Ports;
 using Products.Domain.Entities.Products;
 
 namespace Products.Infrastructure.Repositories
@@ -41,11 +41,11 @@ namespace Products.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(q))
             {
-                var term = q.Trim();
+                var term = q.Trim().ToUpperInvariant();
                 query = query.Where(p =>
-                    p.Title.Contains(term) ||
-                    p.Brand.Contains(term) ||
-                    p.Model.Contains(term));
+                    p.Title.ToUpperInvariant().Contains(term) ||
+                    p.Brand.ToUpperInvariant().Contains(term) ||
+                    p.Model.ToUpperInvariant().Contains(term));
             }
 
             if (!string.IsNullOrWhiteSpace(brand))

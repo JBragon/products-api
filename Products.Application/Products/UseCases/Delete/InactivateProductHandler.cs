@@ -1,8 +1,8 @@
 ﻿using Products.Application.Common.Caching;
 using Products.Application.Common.Exceptions;
-using Products.Application.Ports;
+using Products.Application.Products.Ports;
 
-namespace Products.Application.Products.Services.Command
+namespace Products.Application.Products.UseCases.Delete
 {
     public sealed class InactivateProductHandler : IInactivateProductHandler
     {

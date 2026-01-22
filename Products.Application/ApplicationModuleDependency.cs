@@ -3,8 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Products.Application.Common.Caching;
 using Products.Application.Products.Mapping;
-using Products.Application.Products.Services.Command;
-using Products.Application.Products.Services.Query;
+using Products.Application.Products.UseCases.Create;
+using Products.Application.Products.UseCases.Delete;
+using Products.Application.Products.UseCases.Query.GetDetail;
+using Products.Application.Products.UseCases.Query.Search;
+using Products.Application.Products.UseCases.Update;
 
 namespace Products.Application
 {
@@ -20,10 +23,12 @@ namespace Products.Application
             services.AddSingleton(sp =>
                 mapperConfig.CreateMapper());
 
-            services.AddScoped<IProductQueryService, ProductQueryService>();
+            services.AddScoped<IGetProductDetailHandler, GetProductDetailHandler>();
             services.AddScoped<ICreateProductHandler, CreateProductHandler>();
             services.AddScoped<IUpdateProductHandler, UpdateProductHandler>();
             services.AddScoped<IInactivateProductHandler, InactivateProductHandler>();
+            services.AddScoped<IGetProductDetailHandler, GetProductDetailHandler>();
+            services.AddScoped<ISearchProductsHandler, SearchProductsHandler>();
             services.AddSingleton<IProductCache, ProductMemoryCache>();
 
             return services;

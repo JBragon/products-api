@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using Products.Application.Common.Idempotency;
+using Products.Application.Products.Ports;
 
 namespace Products.Infrastructure.Idempotency
 {

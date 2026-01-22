@@ -1,9 +1,7 @@
-﻿using Products.Application.Common.Idempotency;
-using Products.Application.Ports;
-using Products.Application.Products.Services.Query;
+﻿using Products.Application.Products.Ports;
 using Products.Domain.Entities.Products;
 
-namespace Products.Application.Products.Services.Command
+namespace Products.Application.Products.UseCases.Create
 {
     public sealed class CreateProductHandler: ICreateProductHandler
     {

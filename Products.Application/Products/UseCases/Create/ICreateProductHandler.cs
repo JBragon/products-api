@@ -1,6 +1,4 @@
-﻿using Products.Application.Products.Services.Command;
-
-namespace Products.Application.Products.Services.Query
+﻿namespace Products.Application.Products.UseCases.Create
 {
     public interface ICreateProductHandler
     {

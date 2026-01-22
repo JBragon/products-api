@@ -1,4 +1,4 @@
-﻿namespace Products.Application.Common.Idempotency
+﻿namespace Products.Application.Products.Ports
 {
     public interface IIdempotencyStore
     {

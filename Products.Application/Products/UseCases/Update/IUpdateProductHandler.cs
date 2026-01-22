@@ -1,4 +1,4 @@
-﻿namespace Products.Application.Products.Services.Command
+﻿namespace Products.Application.Products.UseCases.Update
 {
     public interface IUpdateProductHandler
     {

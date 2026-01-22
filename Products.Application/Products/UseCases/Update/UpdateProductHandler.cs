@@ -1,9 +1,9 @@
 ﻿using Products.Application.Common.Caching;
 using Products.Application.Common.Exceptions;
-using Products.Application.Ports;
+using Products.Application.Products.Ports;
 using Products.Domain.Entities.Products;
 
-namespace Products.Application.Products.Services.Command
+namespace Products.Application.Products.UseCases.Update
 {
     public sealed class UpdateProductHandler : IUpdateProductHandler
     {

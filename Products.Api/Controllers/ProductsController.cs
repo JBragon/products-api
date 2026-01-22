@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Products.Api.Contracts;
 using Products.Api.Filters;
-using Products.Application.Products.Queries;
-using Products.Application.Products.Services.Command;
-using Products.Application.Products.Services.Query;
+using Products.Application.Products.UseCases.Create;
+using Products.Application.Products.UseCases.Delete;
+using Products.Application.Products.UseCases.Query.GetDetail;
+using Products.Application.Products.UseCases.Query.Search;
+using Products.Application.Products.UseCases.Update;
 
 namespace Products.Api.Controllers
 {
@@ -11,21 +13,28 @@ namespace Products.Api.Controllers
     [Route("api/products")]
     public sealed class ProductsController : ControllerBase
     {
-        private readonly IProductQueryService _service;
+        private readonly IGetProductDetailHandler _service;
         private readonly ICreateProductHandler _createProductHandler;
         private readonly IUpdateProductHandler _updateProductHandler;
         private readonly IInactivateProductHandler _inactivateProductHandler;
+        private readonly IGetProductDetailHandler _getProductDetailHandler;
+        private readonly ISearchProductsHandler _searchProductsHandler;
 
         public ProductsController(
-            IProductQueryService service,
+            IGetProductDetailHandler service,
             ICreateProductHandler createProductHandler,
             IUpdateProductHandler updateProductHandler,
-            IInactivateProductHandler inactivateProductHandler)
+            IInactivateProductHandler inactivateProductHandler,
+            IGetProductDetailHandler getProductDetailHandler,
+            ISearchProductsHandler searchProductsHandler
+            )
         {
             _service = service;
             _createProductHandler = createProductHandler;
             _updateProductHandler = updateProductHandler;
             _inactivateProductHandler = inactivateProductHandler;
+            _getProductDetailHandler = getProductDetailHandler;
+            _searchProductsHandler = searchProductsHandler;
         }
 
         [HttpGet("{id}")]
@@ -36,7 +45,7 @@ namespace Products.Api.Controllers
             if (!Guid.TryParse(id, out var guid))
                 return BadRequest(new { error = "Invalid product id. Must be a GUID." });
 
-            var result = await _service.GetDetailAsync(guid, ct);
+            var result = await _getProductDetailHandler.HandleAsync(guid, ct);
             return result is null ? NotFound() : Ok(result);
         }
 
@@ -51,7 +60,7 @@ namespace Products.Api.Controllers
             CancellationToken ct = default
         )
         {
-            var result = await _service.GetListAsync(
+            var result = await _searchProductsHandler.HandleAsync(
                 new ProductListQuery(q, brand, condition, page, pageSize),
                 ct
             );

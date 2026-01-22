@@ -1,6 +1,6 @@
 ﻿using Products.Domain.Entities.Products;
 
-namespace Products.Application.Ports
+namespace Products.Application.Products.Ports
 {
     public interface IProductRepository
     {

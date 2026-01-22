@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Products.Application.Common.Idempotency;
-using Products.Application.Ports;
+using Products.Application.Products.Ports;
 using Products.Infrastructure.Idempotency;
 using Products.Infrastructure.Repositories;
 
