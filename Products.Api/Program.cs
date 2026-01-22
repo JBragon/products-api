@@ -1,7 +1,10 @@
-using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using Products.Api.Contracts;
 using Products.Api.Data;
+using Products.Api.ExceptionHandlingMiddleware;
+using Products.Api.Filters;
+using Products.Api.Validators;
 using Products.Application;
-using Products.Domain.Entities.Products;
 using Products.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +21,14 @@ builder.Services.AddInfrastructure();
 builder.Services.AddControllers();
 
 builder.Services.AddMemoryCache();
+
+//Validators
+builder.Services.AddValidatorsFromAssemblyContaining<ProductCreateRequestValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductUpdateRequestValidator>();
+
+builder.Services.AddScoped<FluentValidationFilter<ProductCreateRequest>>();
+builder.Services.AddScoped<FluentValidationFilter<ProductUpdateRequest>>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -45,5 +56,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();

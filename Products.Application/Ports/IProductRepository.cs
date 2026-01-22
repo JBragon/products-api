@@ -1,9 +1,4 @@
 ﻿using Products.Domain.Entities.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Products.Application.Ports
 {
@@ -18,6 +13,7 @@ namespace Products.Application.Ports
            int pageSize,
            CancellationToken ct);
         Task AddAsync(Product product, CancellationToken ct);
-        Task<bool> ExistsAsync(Guid id, CancellationToken ct);
+        Task UpdateAsync(Product product, CancellationToken ct);
+        Task<Product?> GetByIdForUpdateAsync(Guid id, CancellationToken ct);
     }
 }

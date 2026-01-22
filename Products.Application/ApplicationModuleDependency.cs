@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
+using Products.Application.Common.Caching;
 using Products.Application.Products.Mapping;
 using Products.Application.Products.Services.Command;
 using Products.Application.Products.Services.Query;
@@ -21,6 +22,8 @@ namespace Products.Application
 
             services.AddScoped<IProductQueryService, ProductQueryService>();
             services.AddScoped<ICreateProductHandler, CreateProductHandler>();
+            services.AddScoped<IUpdateProductHandler, UpdateProductHandler>();
+            services.AddSingleton<IProductCache, ProductMemoryCache>();
 
             return services;
         }

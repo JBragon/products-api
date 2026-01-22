@@ -13,6 +13,13 @@ namespace Products.Infrastructure.Repositories
         public Task<Product?> GetByIdAsync(Guid id, CancellationToken ct) =>
             _db.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, ct);
 
+        public Task<Product?> GetByIdForUpdateAsync(Guid id, CancellationToken ct) =>
+            _db.Products
+                .AsTracking()
+                .Include("_attributes")
+                .Include("_pictures")
+                .FirstOrDefaultAsync(p => p.Id == id, ct);
+
         public async Task<(IReadOnlyCollection<Product> Items, int Total)> SearchAsync
         (
             string? q,
@@ -73,8 +80,11 @@ namespace Products.Infrastructure.Repositories
             await _db.SaveChangesAsync(ct);
         }
 
-        public Task<bool> ExistsAsync(Guid id, CancellationToken ct) =>
-            _db.Products.AsNoTracking().AnyAsync(x => x.Id == id, ct);
+        public async Task UpdateAsync(Product product, CancellationToken ct)
+        {
+            _db.Products.Update(product);
+            await _db.SaveChangesAsync(ct);
+        }
 
     }
 }

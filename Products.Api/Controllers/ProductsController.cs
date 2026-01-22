@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Products.Api.Contracts;
+using Products.Api.Filters;
 using Products.Application.Products.Queries;
 using Products.Application.Products.Services.Command;
 using Products.Application.Products.Services.Query;
@@ -12,13 +13,16 @@ namespace Products.Api.Controllers
     {
         private readonly IProductQueryService _service;
         private readonly ICreateProductHandler _createProductHandler;
+        private readonly IUpdateProductHandler _updateProductHandler;
 
         public ProductsController(
             IProductQueryService service,
-            ICreateProductHandler createProductHandler)
+            ICreateProductHandler createProductHandler,
+            IUpdateProductHandler updateProductHandler)
         {
             _service = service;
             _createProductHandler = createProductHandler;
+            _updateProductHandler = updateProductHandler;
         }
 
         // GET /api/products/{id}
@@ -54,10 +58,11 @@ namespace Products.Api.Controllers
         }
 
         [HttpPost]
+        [ServiceFilter(typeof(FluentValidationFilter<ProductCreateRequest>))]
         public async Task<IActionResult> Create(
-    [FromBody] ProductCreateRequest request,
-    [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey,
-    CancellationToken ct)
+            [FromBody] ProductCreateRequest request,
+            [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey,
+            CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(idempotencyKey))
                 return BadRequest("Idempotency-Key header is required.");
@@ -87,6 +92,36 @@ namespace Products.Api.Controllers
             );
 
             return CreatedAtAction(nameof(GetById), new { id = productId }, null);
+        }
+
+        [HttpPut("{id:guid}")]
+        [ServiceFilter(typeof(FluentValidationFilter<ProductUpdateRequest>))]
+        public async Task<IActionResult> Update(
+            Guid id,
+            [FromBody] ProductUpdateRequest request,
+            CancellationToken ct)
+        {
+            var command = new UpdateProductCommand(
+                ProductId: id,
+                Title: request.Title,
+                Brand: request.Brand,
+                Model: request.Model,
+                Condition: request.Condition,
+                Price: request.Price,
+                Currency: request.Currency,
+                Stock: request.Stock,
+                Description: request.Description,
+                Attributes: request.Attributes?
+                    .Select(a => (a.Name, a.Value))
+                    .ToList() ?? [],
+                Pictures: request.Pictures?
+                    .Select(p => p.Url)
+                    .ToList() ?? []
+            );
+
+            await _updateProductHandler.HandleAsync(command, ct);
+
+            return NoContent(); // PUT bem feito
         }
     }
 }

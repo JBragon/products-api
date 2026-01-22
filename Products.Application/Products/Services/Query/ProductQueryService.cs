@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Caching.Memory;
 using Products.Application.Common;
+using Products.Application.Common.Caching;
 using Products.Application.Ports;
 using Products.Application.Products.Dtos;
 using Products.Application.Products.Queries;
@@ -11,12 +12,12 @@ namespace Products.Application.Products.Services.Query
     {
         private readonly IProductRepository _repository;
         private readonly IMapper _mapper;
-        private readonly IMemoryCache _cache;
+        private readonly IProductCache _cache;
 
         public ProductQueryService(
             IProductRepository repository,
             IMapper mapper,
-            IMemoryCache cache)
+            IProductCache cache)
         {
             _repository = repository;
             _mapper = mapper;
@@ -25,9 +26,8 @@ namespace Products.Application.Products.Services.Query
 
         public async Task<ProductDetailDto?> GetDetailAsync(Guid productId, CancellationToken ct)
         {
-            var cacheKey = $"products:detail:{productId}";
-
-            if (_cache.TryGetValue(cacheKey, out ProductDetailDto? cached))
+            var cached = await _cache.GetAsync(productId, ct);
+            if (cached is not null)
                 return cached;
 
             var product = await _repository.GetByIdAsync(productId, ct);
@@ -36,14 +36,7 @@ namespace Products.Application.Products.Services.Query
 
             var dto = _mapper.Map<ProductDetailDto>(product);
 
-            // TTL curto: bom pra item detail e suficiente pra demonstrar conhecimento
-            var options = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1),
-                SlidingExpiration = TimeSpan.FromSeconds(20)
-            };
-
-            _cache.Set(cacheKey, dto, options);
+            await _cache.SetAsync(productId, dto, ct);
 
             return dto;
         }

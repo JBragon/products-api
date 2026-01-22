@@ -80,5 +80,28 @@ namespace Products.Domain.Entities.Products
             if (pictures is not null) _pictures = pictures.ToList();
             if (highlights is not null) _highlights = highlights.ToList();
         }
+
+        public void Update(
+            string title,
+            string brand,
+            string model,
+            ProductCondition condition,
+            Money price,
+            Stock stock,
+            string? description,
+            List<ProductAttribute> attributes,
+            List<ProductPicture> pictures)
+        {
+            Title = title;
+            Brand = brand;
+            Model = model;
+            Condition = condition;
+            Price = price;
+            Stock = stock;
+            Description = description;
+
+            _attributes = attributes ?? new();
+            _pictures = pictures ?? new();
+        }
     }
 }
