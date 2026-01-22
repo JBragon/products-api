@@ -14,15 +14,18 @@ namespace Products.Api.Controllers
         private readonly IProductQueryService _service;
         private readonly ICreateProductHandler _createProductHandler;
         private readonly IUpdateProductHandler _updateProductHandler;
+        private readonly IInactivateProductHandler _inactivateProductHandler;
 
         public ProductsController(
             IProductQueryService service,
             ICreateProductHandler createProductHandler,
-            IUpdateProductHandler updateProductHandler)
+            IUpdateProductHandler updateProductHandler,
+            IInactivateProductHandler inactivateProductHandler)
         {
             _service = service;
             _createProductHandler = createProductHandler;
             _updateProductHandler = updateProductHandler;
+            _inactivateProductHandler = inactivateProductHandler;
         }
 
         // GET /api/products/{id}
@@ -122,6 +125,17 @@ namespace Products.Api.Controllers
             await _updateProductHandler.HandleAsync(command, ct);
 
             return NoContent(); // PUT bem feito
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+        {
+            await _inactivateProductHandler.HandleAsync(
+                new InactivateProductCommand(id),
+                ct
+            );
+
+            return NoContent();
         }
     }
 }

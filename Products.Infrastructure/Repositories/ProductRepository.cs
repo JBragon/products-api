@@ -11,7 +11,9 @@ namespace Products.Infrastructure.Repositories
         public ProductRepository(DatabaseContext db) => _db = db;
 
         public Task<Product?> GetByIdAsync(Guid id, CancellationToken ct) =>
-            _db.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id, ct);
+            _db.Products
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive, ct);
 
         public Task<Product?> GetByIdForUpdateAsync(Guid id, CancellationToken ct) =>
             _db.Products
@@ -30,7 +32,7 @@ namespace Products.Infrastructure.Repositories
             CancellationToken ct
         )
         {
-            var query = _db.Products.AsNoTracking().AsQueryable();
+            var query = _db.Products.AsNoTracking().AsQueryable().Where(p => p.IsActive);
 
             if (!string.IsNullOrWhiteSpace(q))
             {

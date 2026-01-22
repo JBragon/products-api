@@ -12,15 +12,13 @@ namespace Products.Domain.Entities.Products
         public string Title { get; private set; } = string.Empty;
         public string Brand { get; private set; } = string.Empty;
         public string Model { get; private set; } = string.Empty;
-
         public ProductCondition Condition { get; private set; }
         public string? Description { get; private set; }
+        public bool IsActive { get; private set; } = true;
 
         public Money Price { get; private set; } = new Money(0m, "BRL");
         public Installments? Installments { get; private set; }
-
         public Stock Stock { get; private set; } = new Stock(0);
-
         public ShippingInfo? Shipping { get; private set; }
         public ReturnsPolicy? Returns { get; private set; }
 
@@ -102,6 +100,14 @@ namespace Products.Domain.Entities.Products
 
             _attributes = attributes ?? new();
             _pictures = pictures ?? new();
+        }
+
+        public void Inactivate()
+        {
+            if (!IsActive)
+                return;
+
+            IsActive = false;
         }
     }
 }

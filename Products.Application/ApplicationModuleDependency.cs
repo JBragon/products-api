@@ -23,6 +23,7 @@ namespace Products.Application
             services.AddScoped<IProductQueryService, ProductQueryService>();
             services.AddScoped<ICreateProductHandler, CreateProductHandler>();
             services.AddScoped<IUpdateProductHandler, UpdateProductHandler>();
+            services.AddScoped<IInactivateProductHandler, InactivateProductHandler>();
             services.AddSingleton<IProductCache, ProductMemoryCache>();
 
             return services;
