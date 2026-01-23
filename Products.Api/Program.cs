@@ -1,5 +1,4 @@
 using FluentValidation;
-using Products.Api.Contracts;
 using Products.Api.Data;
 using Products.Api.ExceptionHandlingMiddleware;
 using Products.Api.Filters;
@@ -26,8 +25,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductCreateRequestValidator>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductUpdateRequestValidator>();
 
-builder.Services.AddScoped<FluentValidationFilter<ProductCreateRequest>>();
-builder.Services.AddScoped<FluentValidationFilter<ProductUpdateRequest>>();
+builder.Services.AddScoped(typeof(FluentValidationFilter<>));
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

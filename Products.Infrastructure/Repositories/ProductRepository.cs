@@ -13,6 +13,9 @@ namespace Products.Infrastructure.Repositories
         public Task<Product?> GetByIdAsync(Guid id, CancellationToken ct) =>
             _db.Products
                 .AsNoTracking()
+                .Include("_attributes")
+                .Include("_pictures")
+                .Include("_highlights")
                 .FirstOrDefaultAsync(p => p.Id == id && p.IsActive, ct);
 
         public Task<Product?> GetByIdForUpdateAsync(Guid id, CancellationToken ct) =>
