@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Products.Application.Common.Caching;
 using Products.Application.Products.Dtos;
 
-namespace Products.Application.Common.Caching
+namespace Products.Infrastructure.Caching
 {
     public sealed class ProductMemoryCache : IProductCache
     {

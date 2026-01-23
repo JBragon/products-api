@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Products.Api.Contracts;
 using Products.Api.Filters;
+using Products.Application.Products.Queries;
 using Products.Application.Products.UseCases.Create;
 using Products.Application.Products.UseCases.Delete;
 using Products.Application.Products.UseCases.Query.GetDetail;
@@ -13,28 +14,24 @@ namespace Products.Api.Controllers
     [Route("api/products")]
     public sealed class ProductsController : ControllerBase
     {
-        private readonly IGetProductDetailHandler _service;
+        private readonly IGetProductDetailHandler _getProductDetailHandler;
+        private readonly ISearchProductsHandler _searchProductsHandler;
         private readonly ICreateProductHandler _createProductHandler;
         private readonly IUpdateProductHandler _updateProductHandler;
         private readonly IInactivateProductHandler _inactivateProductHandler;
-        private readonly IGetProductDetailHandler _getProductDetailHandler;
-        private readonly ISearchProductsHandler _searchProductsHandler;
 
         public ProductsController(
-            IGetProductDetailHandler service,
+            IGetProductDetailHandler getProductDetailHandler,
+            ISearchProductsHandler searchProductsHandler,
             ICreateProductHandler createProductHandler,
             IUpdateProductHandler updateProductHandler,
-            IInactivateProductHandler inactivateProductHandler,
-            IGetProductDetailHandler getProductDetailHandler,
-            ISearchProductsHandler searchProductsHandler
-            )
+            IInactivateProductHandler inactivateProductHandler)
         {
-            _service = service;
+            _getProductDetailHandler = getProductDetailHandler;
+            _searchProductsHandler = searchProductsHandler;
             _createProductHandler = createProductHandler;
             _updateProductHandler = updateProductHandler;
             _inactivateProductHandler = inactivateProductHandler;
-            _getProductDetailHandler = getProductDetailHandler;
-            _searchProductsHandler = searchProductsHandler;
         }
 
         [HttpGet("{id}")]

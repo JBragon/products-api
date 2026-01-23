@@ -1,4 +1,4 @@
-﻿namespace Products.Application.Products.UseCases.Query.Search
+﻿namespace Products.Application.Products.Queries
 {
     public sealed record ProductListQuery (
         string? Q,
