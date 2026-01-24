@@ -129,7 +129,7 @@ namespace Products.Api.Controllers
 
             await _updateProductHandler.HandleAsync(command, ct);
 
-            return NoContent(); // PUT bem feito
+            return NoContent();
         }
 
         [HttpDelete("{id:guid}")]
