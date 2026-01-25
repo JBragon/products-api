@@ -181,6 +181,15 @@ To run the application in an isolated container with all configurations ready:
 
 3.  **Access Swagger**: Open `http://localhost:8080/swagger` in your browser.
 
+### How to Test (E2E)
+
+#### Postman
+To facilitate evaluation, a ready-to-use Postman collection is included:
+1.  Import the `products-api.postman_collection.json` file into Postman.
+2.  Ensure the application is running (Docker or Local).
+3.  The collection uses variables (`baseUrl`, `productId`) to automate testing.
+4.  Run the **Products** folder to see the full flow (List -> Create -> Detail -> Update -> Delete).
+
 ### Via Docker Compose
 ```bash
 docker-compose up --build
