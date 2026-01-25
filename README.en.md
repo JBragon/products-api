@@ -82,6 +82,53 @@ sequenceDiagram
     API-->>Client: 201 Created
 ```
 
+### GET List Flow (Search and Pagination)
+```mermaid
+sequenceDiagram
+    Client->>API: GET /api/products?q=...
+    API->>Application: SearchProductsHandler
+    Application->>Repository: SearchAsync(filters, page)
+    Repository-->>Application: List<Product> + Total
+    Application-->>API: PagedResult<ProductListItemDto>
+    API-->>Client: 200 OK
+```
+
+### PUT Flow (Update)
+```mermaid
+sequenceDiagram
+    Client->>API: PUT /api/products/{id}
+    API->>Application: UpdateProductHandler
+    Application->>Repository: GetByIdForUpdateAsync(id)
+    alt Product Not Found
+        Application-->>API: Exception (404)
+        API-->>Client: 404 Not Found
+    else Product Found
+        Application->>Product: Update(...)
+        Application->>Repository: SaveChangesAsync
+        Application->>Cache: InvalidateAsync(id)
+        Application-->>API: void
+        API-->>Client: 204 No Content
+    end
+```
+
+### DELETE Flow (Logical Deletion)
+```mermaid
+sequenceDiagram
+    Client->>API: DELETE /api/products/{id}
+    API->>Application: InactivateProductHandler
+    Application->>Repository: GetByIdForUpdateAsync(id)
+    alt Product Not Found
+        Application-->>API: Exception (404)
+        API-->>Client: 404 Not Found
+    else Product Found
+        Application->>Product: Inactivate()
+        Application->>Repository: SaveChangesAsync
+        Application->>Cache: InvalidateAsync(id)
+        Application-->>API: void
+        API-->>Client: 204 No Content
+    end
+```
+
 ## Key Endpoints
 
 Full documentation available via Swagger.
