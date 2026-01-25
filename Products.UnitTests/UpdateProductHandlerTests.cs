@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Products.Application.Common.Caching;
 using Products.Application.Common.Exceptions;
@@ -13,13 +14,15 @@ public class UpdateProductHandlerTests
 {
     private readonly Mock<IProductRepository> _repositoryMock;
     private readonly Mock<IProductCache> _cacheMock;
+    private readonly Mock<ILogger<UpdateProductHandler>> _loggerMock;
     private readonly UpdateProductHandler _handler;
 
     public UpdateProductHandlerTests()
     {
         _repositoryMock = new Mock<IProductRepository>();
         _cacheMock = new Mock<IProductCache>();
-        _handler = new UpdateProductHandler(_repositoryMock.Object, _cacheMock.Object);
+        _loggerMock = new Mock<ILogger<UpdateProductHandler>>();
+        _handler = new UpdateProductHandler(_repositoryMock.Object, _cacheMock.Object, _loggerMock.Object);
     }
 
     [Fact]

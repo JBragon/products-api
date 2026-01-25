@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Products.Application.Common.Caching;
 using Products.Application.Products.Dtos;
 
@@ -11,9 +12,15 @@ namespace Products.Infrastructure.Caching
     public sealed class ProductMemoryCache : IProductCache
     {
         private readonly IMemoryCache _cache;
+        private readonly ILogger<ProductMemoryCache> _logger;
 
-        public ProductMemoryCache(IMemoryCache cache)
-            => _cache = cache;
+        public ProductMemoryCache(
+            IMemoryCache cache,
+            ILogger<ProductMemoryCache> logger)
+        {
+            _cache = cache;
+            _logger = logger;
+        }
 
         public Task<ProductDetailDto?> GetAsync(Guid productId, CancellationToken ct)
         {
@@ -30,12 +37,14 @@ namespace Products.Infrastructure.Caching
             };
 
             _cache.Set(GetKey(productId), dto, options);
+            _logger.LogDebug("Cache SET for {ProductId}", productId);
             return Task.CompletedTask;
         }
 
         public Task InvalidateAsync(Guid productId, CancellationToken ct)
         {
             _cache.Remove(GetKey(productId));
+            _logger.LogDebug("Cache REMOVED for {ProductId}", productId);
             return Task.CompletedTask;
         }
 

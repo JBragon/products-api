@@ -1,4 +1,5 @@
-﻿using Products.Application.Products.Ports;
+﻿using Microsoft.Extensions.Logging;
+using Products.Application.Products.Ports;
 using Products.Domain.Entities.Products;
 
 namespace Products.Application.Products.UseCases.Create
@@ -11,13 +12,16 @@ namespace Products.Application.Products.UseCases.Create
     {
         private readonly IProductRepository _repository;
         private readonly IIdempotencyStore _idempotency;
+        private readonly ILogger<CreateProductHandler> _logger;
 
         public CreateProductHandler(
             IProductRepository repository,
-            IIdempotencyStore idempotency)
+            IIdempotencyStore idempotency,
+            ILogger<CreateProductHandler> logger)
         {
             _repository = repository;
             _idempotency = idempotency;
+            _logger = logger;
         }
 
         public async Task<Guid> HandleAsync(
@@ -27,7 +31,12 @@ namespace Products.Application.Products.UseCases.Create
         {
             var existing = await _idempotency.GetAsync(idempotencyKey, ct);
             if (existing.HasValue)
+            {
+                _logger.LogInformation("Idempotency hit for key {IdempotencyKey}. Returning existing ProductId {ProductId}", idempotencyKey, existing.Value);
                 return existing.Value;
+            }
+
+            _logger.LogInformation("Creating new product {ProductId} with Title '{Title}'. Key: {IdempotencyKey}", command.ProductId, command.Title, idempotencyKey);
 
             var condition = Enum.Parse<ProductCondition>(command.Condition, true);
 
@@ -50,6 +59,8 @@ namespace Products.Application.Products.UseCases.Create
 
             await _repository.AddAsync(product, ct);
             await _idempotency.StoreAsync(idempotencyKey, product.Id, ct);
+
+            _logger.LogInformation("Product {ProductId} created successfully.", product.Id);
 
             return product.Id;
         }

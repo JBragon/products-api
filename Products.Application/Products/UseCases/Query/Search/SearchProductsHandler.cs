@@ -1,4 +1,5 @@
-﻿using Products.Application.Common.Paging;
+﻿using Microsoft.Extensions.Logging;
+using Products.Application.Common.Paging;
 using Products.Application.Products.Dtos;
 using Products.Application.Products.Ports;
 using Products.Application.Products.Queries;
@@ -12,15 +13,24 @@ namespace Products.Application.Products.UseCases.Query.Search
     public sealed class SearchProductsHandler : ISearchProductsHandler
     {
         private readonly IProductRepository _repository;
+        private readonly ILogger<SearchProductsHandler> _logger;
 
-        public SearchProductsHandler(IProductRepository repository)
-            => _repository = repository;
+        public SearchProductsHandler(
+            IProductRepository repository,
+            ILogger<SearchProductsHandler> logger)
+        {
+            _repository = repository;
+            _logger = logger;
+        }
 
         public async Task<PagedResult<ProductListItemDto>> HandleAsync(ProductListQuery query, CancellationToken ct)
         {
             var page = query.Page < 1 ? 1 : query.Page;
             var pageSize = query.PageSize is < 1 ? 10 : query.PageSize;
             if (pageSize > 50) pageSize = 50;
+
+            _logger.LogDebug("Searching products. Page: {Page}, Size: {Size}, Query: '{Q}', Brand: '{Brand}'", 
+                page, pageSize, query.Q, query.Brand);
 
             var (items, total) = await _repository.SearchAsync(
                 q: query.Q,

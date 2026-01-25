@@ -1,0 +1,337 @@
+{
+    "info": {
+        "_postman_id": "b36a2d9f-7d9a-4a5d-9a9d-2cdd2f0b1f11",
+        "name": "products-api",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": "Collection to test products-api endpoints (list, detail, create, update, delete) with idempotency and basic scripts."
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080"
+        },
+        {
+            "key": "productId",
+            "value": ""
+        },
+        {
+            "key": "idempotencyKey",
+            "value": ""
+        }
+    ],
+    "item": [
+        {
+            "name": "Health / Swagger (optional)",
+            "item": [
+                {
+                    "name": "Open Swagger UI (manual)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/swagger",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "swagger"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "item": [
+                {
+                    "name": "GET List (paged)",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status is 200', function () {",
+                                    "  pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "try {",
+                                    "  const json = pm.response.json();",
+                                    "  pm.test('Has paging fields', function () {",
+                                    "    pm.expect(json).to.have.property('items');",
+                                    "    pm.expect(json).to.have.property('page');",
+                                    "    pm.expect(json).to.have.property('pageSize');",
+                                    "    pm.expect(json).to.have.property('total');",
+                                    "  });",
+                                    "",
+                                    "  if (json.items && json.items.length > 0 && json.items[0].id) {",
+                                    "    pm.collectionVariables.set('productId', json.items[0].id);",
+                                    "  }",
+                                    "} catch (e) { }"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products?page=1&pageSize=10",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "pageSize",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "GET List (search by q)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products?q={{q}}&page=1&pageSize=10",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "{{q}}"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "pageSize",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "GET Detail (by productId)",
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [
+                                    "if (!pm.collectionVariables.get('productId')) {",
+                                    "  // If productId is empty, run GET List first or paste an id manually",
+                                    "}"
+                                ]
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status is 200 when productId exists', function () {",
+                                    "  pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/{{productId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "{{productId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "POST Create (idempotent)",
+                    "event": [
+                        {
+                            "listen": "prerequest",
+                            "script": {
+                                "exec": [
+                                    "// Ensure Idempotency-Key exists (generate a GUID if empty)",
+                                    "function guid() {",
+                                    "  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {",
+                                    "    var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);",
+                                    "    return v.toString(16);",
+                                    "  });",
+                                    "}",
+                                    "",
+                                    "let key = pm.collectionVariables.get('idempotencyKey');",
+                                    "if (!key) {",
+                                    "  key = guid();",
+                                    "  pm.collectionVariables.set('idempotencyKey', key);",
+                                    "}",
+                                    "",
+                                    "// Make title unique to help searching/debugging if needed",
+                                    "let body = pm.request.body && pm.request.body.raw ? pm.request.body.raw : '';",
+                                    "try {",
+                                    "  const obj = JSON.parse(body);",
+                                    "  if (obj && obj.title && obj.title.indexOf('E2E-') !== 0) {",
+                                    "    obj.title = 'E2E-' + guid() + ' - ' + obj.title;",
+                                    "    pm.request.body.update(JSON.stringify(obj, null, 2));",
+                                    "  }",
+                                    "} catch (e) {}"
+                                ]
+                            }
+                        },
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status is 201', function () {",
+                                    "  pm.response.to.have.status(201);",
+                                    "});",
+                                    "",
+                                    "// Try to capture productId from body (if API returns it)",
+                                    "let id = null;",
+                                    "try {",
+                                    "  const json = pm.response.json();",
+                                    "  if (typeof json === 'string') id = json;",
+                                    "  if (json && json.id) id = json.id;",
+                                    "  if (json && json.productId) id = json.productId;",
+                                    "} catch (e) {}",
+                                    "",
+                                    "// Fallback: try Location header",
+                                    "if (!id) {",
+                                    "  const loc = pm.response.headers.get('Location') || pm.response.headers.get('location');",
+                                    "  if (loc) {",
+                                    "    const parts = loc.split('/');",
+                                    "    id = parts[parts.length - 1];",
+                                    "  }",
+                                    "}",
+                                    "",
+                                    "if (id) {",
+                                    "  pm.collectionVariables.set('productId', id);",
+                                    "}"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Idempotency-Key",
+                                "value": "{{idempotencyKey}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Kindle Paperwhite 11ª Geração\",\n  \"brand\": \"Amazon\",\n  \"model\": \"Paperwhite 11th Gen\",\n  \"condition\": \"new\",\n  \"price\": 899.90,\n  \"currency\": \"BRL\",\n  \"stock\": 25,\n  \"description\": \"E-reader Kindle Paperwhite com tela de 6.8 polegadas, iluminação ajustável e resistência à água.\",\n  \"attributes\": [\n    { \"name\": \"Tela\", \"value\": \"6.8 polegadas\" },\n    { \"name\": \"Armazenamento\", \"value\": \"8GB\" },\n    { \"name\": \"Conectividade\", \"value\": \"Wi-Fi\" },\n    { \"name\": \"Resistência à Água\", \"value\": \"IPX8\" }\n  ],\n  \"pictures\": [\n    { \"url\": \"https://example.com/kindle-paperwhite-front.jpg\" },\n    { \"url\": \"https://example.com/kindle-paperwhite-back.jpg\" }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "PUT Update (by productId)",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status is 204 when product exists (or 404 when not)', function () {",
+                                    "  pm.expect(pm.response.code).to.be.oneOf([204, 404, 422]);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"title\": \"Console PlayStation 5 Slim Digital\",\n  \"brand\": \"Sony\",\n  \"model\": \"PlayStation 5 Slim\",\n  \"condition\": \"new\",\n  \"price\": 3899.00,\n  \"currency\": \"BRL\",\n  \"stock\": 7,\n  \"description\": \"Console PS5 Slim com SSD ultrarrápido, ray tracing e desempenho de nova geração.\",\n  \"attributes\": [\n    { \"name\": \"Armazenamento\", \"value\": \"1TB SSD\" },\n    { \"name\": \"Mídia\", \"value\": \"Digital\" },\n    { \"name\": \"Cor\", \"value\": \"Branco\" },\n    { \"name\": \"Tecnologia Gráfica\", \"value\": \"Ray Tracing\" }\n  ],\n  \"pictures\": [\n    { \"url\": \"https://example.com/ps5slim-1.jpg\" },\n    { \"url\": \"https://example.com/ps5slim-2.jpg\" }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/{{productId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "{{productId}}"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "DELETE (soft delete) by productId",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test('Status is 204 when deleted (or 404 when missing)', function () {",
+                                    "  pm.expect(pm.response.code).to.be.oneOf([204, 404]);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/{{productId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "{{productId}}"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

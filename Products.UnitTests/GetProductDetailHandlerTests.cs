@@ -1,5 +1,6 @@
 using AutoMapper;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Products.Application.Common.Caching;
 using Products.Application.Products.Dtos;
@@ -15,6 +16,7 @@ public class GetProductDetailHandlerTests
     private readonly Mock<IProductRepository> _repositoryMock;
     private readonly Mock<IMapper> _mapperMock;
     private readonly Mock<IProductCache> _cacheMock;
+    private readonly Mock<ILogger<GetProductDetailHandler>> _loggerMock;
     private readonly GetProductDetailHandler _handler;
 
     public GetProductDetailHandlerTests()
@@ -22,7 +24,8 @@ public class GetProductDetailHandlerTests
         _repositoryMock = new Mock<IProductRepository>();
         _mapperMock = new Mock<IMapper>();
         _cacheMock = new Mock<IProductCache>();
-        _handler = new GetProductDetailHandler(_repositoryMock.Object, _mapperMock.Object, _cacheMock.Object);
+        _loggerMock = new Mock<ILogger<GetProductDetailHandler>>();
+        _handler = new GetProductDetailHandler(_repositoryMock.Object, _mapperMock.Object, _cacheMock.Object, _loggerMock.Object);
     }
 
     [Fact]

@@ -1,4 +1,5 @@
-﻿using Products.Application.Common.Caching;
+﻿using Microsoft.Extensions.Logging;
+using Products.Application.Common.Caching;
 using Products.Application.Common.Exceptions;
 using Products.Application.Products.Ports;
 using Products.Domain.Entities.Products;
@@ -13,15 +14,21 @@ namespace Products.Application.Products.UseCases.Update
     {
         private readonly IProductRepository _repository;
         private readonly IProductCache _cache;
+        private readonly ILogger<UpdateProductHandler> _logger;
 
-        public UpdateProductHandler(IProductRepository repository, IProductCache cache)
+        public UpdateProductHandler(
+            IProductRepository repository,
+            IProductCache cache,
+            ILogger<UpdateProductHandler> logger)
         {
             _repository = repository;
             _cache = cache;
+            _logger = logger;
         }
 
         public async Task HandleAsync(UpdateProductCommand command, CancellationToken ct)
         {
+            _logger.LogInformation("Updating product {ProductId}...", command.ProductId);
             var product = await _repository.GetByIdForUpdateAsync(command.ProductId, ct);
 
             if (product is null)
@@ -47,6 +54,8 @@ namespace Products.Application.Products.UseCases.Update
 
             await _repository.SaveChangesAsync(ct);
             await _cache.InvalidateAsync(product.Id, ct);
+
+            _logger.LogInformation("Product {ProductId} updated successfully. Cache invalidated.", command.ProductId);
         }
     }
 }

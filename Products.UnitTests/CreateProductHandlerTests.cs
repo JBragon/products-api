@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Products.Application.Products.Ports;
 using Products.Application.Products.UseCases.Create;
@@ -10,13 +11,15 @@ public class CreateProductHandlerTests
 {
     private readonly Mock<IProductRepository> _repositoryMock;
     private readonly Mock<IIdempotencyStore> _idempotencyStoreMock;
+    private readonly Mock<ILogger<CreateProductHandler>> _loggerMock;
     private readonly CreateProductHandler _handler;
 
     public CreateProductHandlerTests()
     {
         _repositoryMock = new Mock<IProductRepository>();
         _idempotencyStoreMock = new Mock<IIdempotencyStore>();
-        _handler = new CreateProductHandler(_repositoryMock.Object, _idempotencyStoreMock.Object);
+        _loggerMock = new Mock<ILogger<CreateProductHandler>>();
+        _handler = new CreateProductHandler(_repositoryMock.Object, _idempotencyStoreMock.Object, _loggerMock.Object);
     }
 
     [Fact]

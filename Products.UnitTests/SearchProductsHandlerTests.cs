@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using System.Linq;
 using Moq;
 using Products.Application.Common.Paging;
@@ -14,12 +15,14 @@ namespace Products.UnitTests;
 public class SearchProductsHandlerTests
 {
     private readonly Mock<IProductRepository> _repositoryMock;
+    private readonly Mock<ILogger<SearchProductsHandler>> _loggerMock;
     private readonly SearchProductsHandler _handler;
 
     public SearchProductsHandlerTests()
     {
         _repositoryMock = new Mock<IProductRepository>();
-        _handler = new SearchProductsHandler(_repositoryMock.Object);
+        _loggerMock = new Mock<ILogger<SearchProductsHandler>>();
+        _handler = new SearchProductsHandler(_repositoryMock.Object, _loggerMock.Object);
     }
 
     [Fact]

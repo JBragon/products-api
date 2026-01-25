@@ -1,7 +1,8 @@
+using Castle.Core.Logging;
 using FluentAssertions;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Products.Infrastructure.Idempotency;
-using Xunit;
 
 namespace Products.UnitTests;
 
@@ -9,11 +10,13 @@ public class InMemoryIdempotencyStoreTests
 {
     private readonly IMemoryCache _memoryCache;
     private readonly InMemoryIdempotencyStore _store;
+    private readonly ILogger<InMemoryIdempotencyStore> _logger;
 
     public InMemoryIdempotencyStoreTests()
     {
+        _logger = new Logger<InMemoryIdempotencyStore>(new LoggerFactory());
         _memoryCache = new MemoryCache(new MemoryCacheOptions());
-        _store = new InMemoryIdempotencyStore(_memoryCache);
+        _store = new InMemoryIdempotencyStore(_memoryCache, _logger);
     }
 
     [Fact]
