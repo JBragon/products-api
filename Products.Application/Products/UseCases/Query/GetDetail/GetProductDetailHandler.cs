@@ -5,6 +5,10 @@ using Products.Application.Products.Ports;
 
 namespace Products.Application.Products.UseCases.Query.GetDetail
 {
+    /// <summary>
+    /// Retrieves full product details.
+    /// Utilizes a "look-aside" cache strategy to minimize database hits.
+    /// </summary>
     public sealed class GetProductDetailHandler : IGetProductDetailHandler
     {
         private readonly IProductRepository _repository;

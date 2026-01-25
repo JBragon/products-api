@@ -26,6 +26,11 @@ namespace Products.Infrastructure.Repositories
                 .Include("_highlights")
                 .FirstOrDefaultAsync(p => p.Id == id && p.IsActive, ct);
 
+        /// <inheritdoc />
+        /// <remarks>
+        /// Implements filtering by title/brand/model, exact match for brand/condition, 
+        /// and applies default sorting (Best Rated then Title).
+        /// </remarks>
         public async Task<(IReadOnlyCollection<Product> Items, int Total)> SearchAsync
         (
             string? q,

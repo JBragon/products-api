@@ -5,6 +5,10 @@ using Products.Application.Products.Queries;
 
 namespace Products.Application.Products.UseCases.Query.Search
 {
+    /// <summary>
+    /// Handles product listing with support for search, filtering, and pagination.
+    /// Queries the repository directly (no cache) to ensure fresh search results.
+    /// </summary>
     public sealed class SearchProductsHandler : ISearchProductsHandler
     {
         private readonly IProductRepository _repository;

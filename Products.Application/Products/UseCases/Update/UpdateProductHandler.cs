@@ -5,6 +5,10 @@ using Products.Domain.Entities.Products;
 
 namespace Products.Application.Products.UseCases.Update
 {
+    /// <summary>
+    /// Handles full updates of existing products.
+    /// Invalidates the read cache for the specific product after a successful update.
+    /// </summary>
     public sealed class UpdateProductHandler : IUpdateProductHandler
     {
         private readonly IProductRepository _repository;

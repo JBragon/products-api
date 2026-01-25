@@ -3,6 +3,10 @@ using Products.Application.Products.Ports;
 
 namespace Products.Infrastructure.Idempotency
 {
+    /// <summary>
+    /// Temporary in-memory storage for idempotency keys.
+    /// In a real scenario, this should be replaced by a distributed store like Redis.
+    /// </summary>
     public sealed class InMemoryIdempotencyStore : IIdempotencyStore
     {
         private readonly IMemoryCache _cache;

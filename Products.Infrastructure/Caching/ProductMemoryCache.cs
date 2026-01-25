@@ -4,6 +4,10 @@ using Products.Application.Products.Dtos;
 
 namespace Products.Infrastructure.Caching
 {
+    /// <summary>
+    /// In-memory implementation of product cache using IMemoryCache.
+    /// Configures absolute and sliding expiration for entries.
+    /// </summary>
     public sealed class ProductMemoryCache : IProductCache
     {
         private readonly IMemoryCache _cache;

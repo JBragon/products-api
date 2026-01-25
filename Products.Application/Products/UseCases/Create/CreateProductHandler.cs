@@ -3,6 +3,10 @@ using Products.Domain.Entities.Products;
 
 namespace Products.Application.Products.UseCases.Create
 {
+    /// <summary>
+    /// Handles the creation of new products.
+    /// Ensures idempotency using the provided key to prevent duplicate records.
+    /// </summary>
     public sealed class CreateProductHandler: ICreateProductHandler
     {
         private readonly IProductRepository _repository;

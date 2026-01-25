@@ -4,6 +4,10 @@ using Products.Application.Products.Ports;
 
 namespace Products.Application.Products.UseCases.Delete
 {
+    /// <summary>
+    /// Handles the logical deletion (inactivation) of a product.
+    /// Marks the product as inactive and invalidates the cache.
+    /// </summary>
     public sealed class InactivateProductHandler : IInactivateProductHandler
     {
         private readonly IProductRepository _repository;

@@ -10,6 +10,10 @@ using Products.Application.Products.UseCases.Update;
 
 namespace Products.Api.Controllers
 {
+    /// <summary>
+    /// API Controller exposing endpoints for product management.
+    /// Acts as an entry point, delegating logic to Application Use Cases via specific Handlers.
+    /// </summary>
     [ApiController]
     [Route("api/products")]
     public sealed class ProductsController : ControllerBase
@@ -34,6 +38,13 @@ namespace Products.Api.Controllers
             _inactivateProductHandler = inactivateProductHandler;
         }
 
+        /// <summary>
+        /// Retrieves a product by its unique identifier (GUID).
+        /// Triggers the GetProductDetail use case.
+        /// </summary>
+        /// <param name="id">The product ID (GUID).</param>
+        /// <param name="ct">Cancellation Token.</param>
+        /// <returns>The product details if found; otherwise, 404.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,6 +57,17 @@ namespace Products.Api.Controllers
             return result is null ? NotFound() : Ok(result);
         }
 
+        /// <summary>
+        /// Lists products with support for pagination, filtering, and text search.
+        /// Triggers the SearchProducts use case.
+        /// </summary>
+        /// <param name="q">Optional text search term.</param>
+        /// <param name="brand">Filter by exact brand name.</param>
+        /// <param name="condition">Filter by condition (New, Used, etc).</param>
+        /// <param name="page">Page number (default 1).</param>
+        /// <param name="pageSize">Items per page (default 10).</param>
+        /// <param name="ct">Cancellation Token.</param>
+        /// <returns>A paged list of products.</returns>
         [HttpGet]
         public async Task<IActionResult> GetList
         (
@@ -65,6 +87,15 @@ namespace Products.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Creates a new product.
+        /// Requires Idempotency-Key header to guarantee safe retries.
+        /// Triggers the CreateProduct use case.
+        /// </summary>
+        /// <param name="request">The product creation payload.</param>
+        /// <param name="idempotencyKey">Unique key (UUID) to ensure idempotency.</param>
+        /// <param name="ct">Cancellation Token.</param>
+        /// <returns>The created product's resource location.</returns>
         [HttpPost]
         [ServiceFilter(typeof(FluentValidationFilter<ProductCreateRequest>))]
         public async Task<IActionResult> Create(
@@ -102,6 +133,14 @@ namespace Products.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = productId }, null);
         }
 
+        /// <summary>
+        /// Fully updates an existing product.
+        /// Triggers the UpdateProduct use case.
+        /// </summary>
+        /// <param name="id">The ID of the product to update.</param>
+        /// <param name="request">The update payload.</param>
+        /// <param name="ct">Cancellation Token.</param>
+        /// <returns>No Content (204) if successful.</returns>
         [HttpPut("{id:guid}")]
         [ServiceFilter(typeof(FluentValidationFilter<ProductUpdateRequest>))]
         public async Task<IActionResult> Update(
@@ -132,6 +171,13 @@ namespace Products.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Inactivates (soft deletes) a product.
+        /// Triggers the InactivateProduct use case.
+        /// </summary>
+        /// <param name="id">The product ID.</param>
+        /// <param name="ct">Cancellation Token.</param>
+        /// <returns>No Content (204) if successful or if product was already inactive.</returns>
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
         {
