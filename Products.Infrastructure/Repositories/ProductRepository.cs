@@ -59,12 +59,10 @@ namespace Products.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(condition))
             {
-                // aceita "new"/"used" etc
                 if (Enum.TryParse<ProductCondition>(condition, true, out var parsed))
                     query = query.Where(p => p.Condition == parsed);
             }
 
-            // ordenação default "marketplace": mais bem avaliados primeiro, depois título
             query = query
                 .OrderByDescending(p => p.Rating != null ? p.Rating.Average : 0m)
                 .ThenBy(p => p.Title);
